@@ -29,14 +29,15 @@ line-height: 14px;
 
     var onSubmitComplete = function(error) {
         var contactForm = document.getElementById('contact-form');
-        var contactSuccess = document.getElementById('contact-success');
-        var contactError = document.getElementById('contact-error');
+        var contactResponse = document.getElementById('contact-response');
         var contactBtn = document.getElementById('btn-submit');
       contactBtn.disabled = false;
       if (error) {
-        contactError.innerHTML = 'Sorry. Could not submit the error report.';
+        contactResponse.innerHTML = 
+            '<div class="alert alert-danger">Sorry. Could not submit the error report.</div>';
       } else {
-        contactSuccess.innerHTML = 'Thanks for submitting your error report!';
+        contactResponse.innerHTML =
+            '<div class="alert alert-success">Thanks for submitting your error report!</div>';
         // hide the form
         contactForm.style.display = 'none';
       }
@@ -44,20 +45,22 @@ line-height: 14px;
 
     function reporterror(formObj) {
         // Store error information to firebase
-        var contactForm = document.getElementById('contact-form');
-        var contactSuccess = document.getElementById('contact-success');
-        var contactError = document.getElementById('contact-error');
         var contactBtn = document.getElementById('btn-submit');
         var myFirebaseRef = new Firebase("https://epiclogger.firebaseio.com/errors");
-        console.log(formObj.InputEmail.value);
+        var id = getUrlVars()['id'];
+        var currentdate = new Date(); 
+        var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
         myFirebaseRef.push({
-            'id' : true
-          //'id' : getUrlVars()['id']
-          //'email' : formObj.InputEmail.value,
-          //'notes' : formObj.InputMessage.value,
-          //'timestamp': Date.now()
-        }, onSubmitComplete);
-        console.log(contactBtn);     
+          'id' : id,
+          'email' : formObj.InputEmail.value,
+          'notes' : formObj.InputMessage.value,
+          'timestamp': datetime
+        }, onSubmitComplete);   
         contactBtn.disabled = true;
         return false;
     }
@@ -79,8 +82,7 @@ Let us know and we will get back to you once we fix the issue.
 </strong>
 </p>
 <div class="row">
-<div class="alert alert-success" id="contact-success" style="display:none"></div>
-<div class="alert alert-danger" id="contact-error" style="display:none"></div>
+<div id="contact-response"></div>
   <form role="form" onsubmit="return reporterror(this)" id="contact-form">
     <div class="col-lg-6">
       <div class="well well-sm"><strong><i class="glyphicon glyphicon-ok form-control-feedback"></i> Required Field</strong></div>
