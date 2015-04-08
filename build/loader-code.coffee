@@ -11,8 +11,8 @@ window.widgetLoader = ((window,document) ->
   "use strict"
 
   defaults=
-    widget_domain:  '//location.for.iframe.widget' # the widget domain/ tablebookings
-    domain:         '//domain.for.iframe.widget' # the default domain value (this will change with execution)
+    widget_domain:  '//location.for.iframe.widget' # the contact form to load
+    domain:         '//domain.for.iframe.widget'
     modal_width:    false
     modal_height:   false
     iframe_widget:  false
@@ -175,7 +175,7 @@ window.widgetLoader = ((window,document) ->
             el = elements[i]
             if el.addEventListener
               el.addEventListener eventName, handler
-            else
+            else if el.attachEvent
               el.attachEvent "on" + eventName, ->
                 handler.call elem
             i++

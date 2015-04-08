@@ -194,7 +194,7 @@ A self-contained loader library
               el = elements[i];
               if (el.addEventListener) {
                 el.addEventListener(eventName, handler);
-              } else {
+              } else if (el.attachEvent) {
                 el.attachEvent("on" + eventName, function() {
                   return handler.call(elem);
                 });
