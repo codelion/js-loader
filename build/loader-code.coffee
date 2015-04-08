@@ -59,7 +59,7 @@ window.widgetLoader = ((window,document) ->
     window.ELopts.domain = info_received.domain if info_received.domain!=undefined
 
     if isMobile()
-      window.open(window.ELopts.domain+window.ELopts.widget_url,'_blank')
+      window.open(window.ELopts.domain+"?id="+window.ELopts.widget_url,'_blank')
     else
       openModal()
 
@@ -75,7 +75,7 @@ window.widgetLoader = ((window,document) ->
     outerHeight= if typeof widget_height=="number" then current_height-widget_height else (current_height*parseInt(widget_height)/100)
 
     picoModal(
-      content: '<iframe id="WDG_widgetIframe" src="'+ window.ELopts.domain+window.ELopts.widget_url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
+      content: '<iframe id="WDG_widgetIframe" src="'+ window.ELopts.domain+"?id="+window.ELopts.widget_url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
       overlayStyles:
         backgroundColor: "#333"
         opacity: "0.3"
@@ -115,7 +115,7 @@ window.widgetLoader = ((window,document) ->
   # ---- addWidget Method
   # -- we add the iframe widget to the element specified when initializing the plugin
   addWidget= ()->
-    url = window.ELopts.domain+window.ELopts.widget_url+"?theme=#{window.ELopts.theme}"
+    url = window.ELopts.domain+"?id="+window.ELopts.widget_url+"?theme=#{window.ELopts.theme}"
     widget_iframe_html = '<iframe id="iframe_widget" src="'+url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
     $el = $s(window.ELopts.widget_container)
     $el.html(widget_iframe_html)  
