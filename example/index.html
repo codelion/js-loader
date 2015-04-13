@@ -6,10 +6,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Reservations Widget Loader</title>
+	<title>Error 404</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<meta name="description" content="Reservations loading plugin.">
+	<meta name="description" content="Error Reporting Plugin">
 	<meta name="author" content="Chocksy,EpicCoders">
 
 	<style type="text/css">
@@ -19,13 +19,14 @@
 
 </head>
 <body>
-  <h1>Hello thor!</h1>	
-	<h2>This is loaded in the page and on the side you have the one loaded by the button</h2>
-  <div id="side_widget"></div>
+  <h1>404 Page Not Found!</h1>	
+	<!--
+  <h2>This is loaded in the page and on the side you have the one loaded by the button</h2>
+
    
   <a href="http://google.com" class='tb-modal' data-widget="c1eea070ec4dbb53">apasal</a>
   <a href="http://yahoo.com" class='tb-modal-special' data-special="324d84" data-restaurant="1" data-restaurant-slug="chocksy-s-restaurant">Voucher loader</a>
-	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
 
 <script type='text/javascript'>
 (function (d, t) {
@@ -35,21 +36,21 @@
   s.parentNode.insertBefore(bh, s);
   })(document, 'script');
 </script>
-    
+ -->
+
 	<script type="text/javascript">
     var _lopts = _lopts || [];
-        _lopts.widget_domain    = "//table-bookings.dev/widgets/"
-        _lopts.widget_url       = "c1eea070ec4dbb53";
-        _lopts.specials_domain  = '//deals-tablebookings.dev/'
+        _lopts.widget_domain    = "//localhost:8000/contact.html"
+        _lopts.widget_url       = "1213";
         // _lopts.theme            = "light";
         _lopts.modal_width      = "60%";
-        _lopts.modal_height     = 500;
+        _lopts.modal_height     = 400;
         // _lopts.widget_container = "#side_widget";
         _lopts.custom_widget    = true;
         _lopts.side_btn         = true;
         // _lopts.iframe_widget    = true;
 
-    var local_script = "tablebookings-widget.site/build/loader-min.js";
+    var local_script = "localhost:8000/loader.min.js";
     var s3_script    = "d1u2f2r665j4oh.cloudfront.net/loader-v2.1.js";
 
     (function() {

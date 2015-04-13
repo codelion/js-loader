@@ -11,8 +11,8 @@ window.widgetLoader = ((window,document) ->
   "use strict"
 
   defaults=
-    widget_domain:  '//location.for.iframe.widget' # the widget domain/ tablebookings
-    domain:         '//domain.for.iframe.widget' # the default domain value (this will change with execution)
+    widget_domain:  '//location.for.iframe.widget' # the contact form to load
+    domain:         '//domain.for.iframe.widget'
     modal_width:    false
     modal_height:   false
     iframe_widget:  false
@@ -59,7 +59,7 @@ window.widgetLoader = ((window,document) ->
     window.ELopts.domain = info_received.domain if info_received.domain!=undefined
 
     if isMobile()
-      window.open(window.ELopts.domain+window.ELopts.widget_url,'_blank')
+      window.open(window.ELopts.domain+"?id="+window.ELopts.widget_url,'_blank')
     else
       openModal()
 
@@ -75,7 +75,7 @@ window.widgetLoader = ((window,document) ->
     outerHeight= if typeof widget_height=="number" then current_height-widget_height else (current_height*parseInt(widget_height)/100)
 
     picoModal(
-      content: '<iframe id="WDG_widgetIframe" src="'+ window.ELopts.domain+window.ELopts.widget_url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
+      content: '<iframe id="WDG_widgetIframe" src="'+ window.ELopts.domain+"?id="+window.ELopts.widget_url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
       overlayStyles:
         backgroundColor: "#333"
         opacity: "0.3"
@@ -100,9 +100,9 @@ window.widgetLoader = ((window,document) ->
               position:"fixed"
               top: "20%"
               left: "0"
-              width: "50px"
-              height: "157px"
-              background: "url(//d1u2f2r665j4oh.cloudfront.net/side_button.png)"
+              width: "90px"
+              height: "90px"
+              background: "url(//i.imgur.com/jxoB4das.png)"
               textIndent: "-9999px"
               boxShadow: "2px 1px 4px #ccc"
               borderRadius: "5px"
@@ -115,7 +115,7 @@ window.widgetLoader = ((window,document) ->
   # ---- addWidget Method
   # -- we add the iframe widget to the element specified when initializing the plugin
   addWidget= ()->
-    url = window.ELopts.domain+window.ELopts.widget_url+"?theme=#{window.ELopts.theme}"
+    url = window.ELopts.domain+"?id="+window.ELopts.widget_url+"?theme=#{window.ELopts.theme}"
     widget_iframe_html = '<iframe id="iframe_widget" src="'+url+'" class="iframe-class" style="width:100%;height:100%;" frameborder="0" allowtransparency="true"></iframe>'
     $el = $s(window.ELopts.widget_container)
     $el.html(widget_iframe_html)  
@@ -175,7 +175,7 @@ window.widgetLoader = ((window,document) ->
             el = elements[i]
             if el.addEventListener
               el.addEventListener eventName, handler
-            else
+            else if el.attachEvent
               el.attachEvent "on" + eventName, ->
                 handler.call elem
             i++
